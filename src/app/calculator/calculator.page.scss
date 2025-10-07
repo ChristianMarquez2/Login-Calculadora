@@ -1,0 +1,227 @@
+/* ---------- Variables & helpers ---------- */
+:host {
+  --radius: 16px;
+  --gap: 12px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* Colores adaptados al tema de Ionic */
+  --card-bg: var(--ion-card-background, var(--ion-background-color));
+  --text-color: var(--ion-text-color);
+  --muted: rgba(var(--ion-text-color-rgb, 0,0,0), 0.6);
+  --border: rgba(var(--ion-text-color-rgb, 0,0,0), 0.08);
+}
+
+/* ---------- Layout general ---------- */
+ion-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 24px;
+}
+
+ion-card {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: var(--card-bg);
+  overflow: hidden;
+}
+
+ion-card-header {
+  padding-bottom: 6px;
+
+  ion-card-title {
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+
+  ion-card-subtitle {
+    color: var(--muted);
+    margin-top: 4px;
+  }
+}
+
+/* ---------- Inputs ---------- */
+ion-item {
+  --background: transparent;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --inner-padding-top: 8px;
+  --inner-padding-bottom: 8px;
+  --highlight-height: 2px;
+
+  border-bottom: 1px solid var(--border);
+
+  &:first-of-type {
+    margin-top: 4px;
+  }
+
+  & + ion-item {
+    margin-top: 8px;
+  }
+
+  ion-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  ion-input {
+    --padding-top: 6px;
+    --padding-bottom: 6px;
+    --padding-start: 0;
+    --padding-end: 0;
+    font-size: 1.05rem;
+
+    /* Estado de foco visible */
+    &:focus-within {
+      outline: none;
+    }
+  }
+
+  /* Toggle de grados/radianes más compacto */
+  ion-toggle {
+    --handle-background: var(--ion-color-primary-contrast);
+    --background: rgba(var(--ion-color-primary-rgb), 0.2);
+    --background-checked: rgba(var(--ion-color-primary-rgb), 0.3);
+    --handle-background-checked: var(--ion-color-primary-contrast);
+    margin-left: auto;
+  }
+}
+
+/* ---------- Mensajes ---------- */
+ion-text[color="danger"] {
+  display: block;
+  padding: 10px 12px;
+  margin-top: 8px;
+  border-radius: 12px;
+  background: rgba(220, 53, 69, 0.08);
+  color: var(--ion-color-danger);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+ion-item.resultado {
+  --background: rgba(var(--ion-color-success-rgb), 0.06);
+  border: 1px solid rgba(var(--ion-color-success-rgb), 0.25);
+  border-radius: 12px;
+  margin-top: 12px;
+  padding-inline: 10px;
+
+  ion-label {
+    color: rgba(var(--ion-color-success-rgb), 1);
+    font-weight: 600;
+  }
+
+  ion-note {
+    font-weight: 700;
+  }
+}
+
+/* ---------- Grid de botones ---------- */
+ion-grid {
+  margin-top: 14px;
+
+  ion-row + ion-row {
+    margin-top: var(--gap);
+  }
+
+  ion-col {
+    padding: 0 var(--gap) 0 0;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+/* Botones: forma y estados */
+ion-button {
+  --border-radius: 14px;
+  --box-shadow: none;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  height: 44px;
+
+  /* Suave efecto al presionar */
+  transform: translateZ(0);
+  transition: transform 0.06s ease;
+  &:active {
+    transform: scale(0.98);
+  }
+
+  /* Variantes por intención */
+  &.op {
+    --background: rgba(var(--ion-color-primary-rgb), 1);
+    --background-hover: rgba(var(--ion-color-primary-rgb), 0.9);
+    --background-activated: rgba(var(--ion-color-primary-rgb), 0.85);
+    --color: var(--ion-color-primary-contrast);
+  }
+
+  &.util {
+    --background: rgba(var(--ion-text-color-rgb, 0,0,0), 0.08);
+    --color: var(--text-color);
+    backdrop-filter: saturate(120%) blur(2px);
+  }
+
+  &.equal {
+    --background: var(--ion-color-success);
+    --background-hover: color-mix(in srgb, var(--ion-color-success) 90%, black);
+    --color: var(--ion-color-success-contrast);
+  }
+
+  &.danger {
+    --background: var(--ion-color-danger);
+    --color: var(--ion-color-danger-contrast);
+  }
+}
+
+/* ---------- Accesibilidad: foco visible ---------- */
+ion-button:focus-visible,
+ion-input:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--ion-color-primary) 45%, transparent);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 480px) {
+  ion-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+  }
+
+  ion-card {
+    margin-inline: auto;
+    max-width: 560px;
+  }
+
+  ion-button {
+    height: 48px;
+  }
+}
+
+@media (min-width: 768px) {
+  ion-card {
+    max-width: 640px;
+  }
+}
+
+/* ---------- Modo oscuro: micro-ajustes ---------- */
+:host-context(.ion-color-scheme-dark),
+:host-context(body.dark) {
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --border: rgba(255, 255, 255, 0.08);
+  --muted: rgba(255, 255, 255, 0.6);
+
+  ion-text[color="danger"] {
+    background: rgba(220, 53, 69, 0.12);
+    border-color: rgba(220, 53, 69, 0.35);
+  }
+
+  ion-item.resultado {
+    --background: rgba(var(--ion-color-success-rgb), 0.12);
+    border-color: rgba(var(--ion-color-success-rgb), 0.35);
+  }
+
+  ion-button.util {
+    --background: rgba(255, 255, 255, 0.08);
+  }
+}
